@@ -17,6 +17,11 @@
 <link rel="stylesheet" href="{{url('public')}}/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
 <link rel="stylesheet" href="{{url('public')}}/assets/vendor/charts/c3charts/c3.css">
 <link rel="stylesheet" href="{{url('public')}}/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>Concept - Bootstrap 4 Admin Dashboard Template</title>

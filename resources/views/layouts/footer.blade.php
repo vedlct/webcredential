@@ -53,6 +53,7 @@
 <script src="{{url('public')}}/assets/libs/js/dashboard-ecommerce.jsassets/vendor/jquery/jquery-3.3.1.min.js"
         type="b8fd414519b7beb5cef45640-text/javascript"></script>
 
+<script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
         type="b8fd414519b7beb5cef45640-text/javascript"></script>
 <script type="b8fd414519b7beb5cef45640-text/javascript">

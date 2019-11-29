@@ -1,4 +1,6 @@
 @include('layouts.header')
+
+
 <body>
 
 
@@ -12,19 +14,24 @@
 
 
 
-            <div class="w3-container w3-blue">
-                <h2>Department</h2>
-            </div>
+
+{{--            <div class="col-sm-8 col-9 text-right m-b-20">--}}
+{{--                <a href="{{ route('department.add') }}" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Department</a>--}}
+{{--            </div>--}}
 
 
         </div>
         <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">Patients</h4>
+            </div>
+
             <div class="col-md-12">
                 <div class="table-responsive">
                     <table id="departmenttable" class="table table-border table-striped custom-table mb-0">
                         <thead>
                         <tr>
-                       <th align="center">Department Name</th>
+                       <th>Department Name</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -68,7 +75,7 @@
                 {
                     // var id = $(x).data('panel-id2');
                     var id = $(x).data('panel-id2');
-                    var url = '{{route("department.edit", ":id") }}';
+                    var url = '{{route("department.edit", ":DepartmentId") }}';
                     // alert(id);
                     var newUrl = url.replace(':id', id);
                     window.location.href = newUrl;
