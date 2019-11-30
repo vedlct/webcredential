@@ -20,8 +20,10 @@ Route::view('admin/login', 'login');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/department', 'DepartmentController@index')->name('department');
-Route::get('/department/add', 'DepartmentController@add')->name('department.add');
+Route::post('/department/insert', 'DepartmentController@insert')->name('department.insert');
+//Route::resource('/department','DepartmentController@insert');
 Route::post('/departmentShow', 'DepartmentController@showDepartment')->name('department.show');
+Route::post('/department-delete', 'DepartmentController@deletedepartment')->name('department.delete');
 
 
 

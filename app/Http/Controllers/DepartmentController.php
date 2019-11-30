@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Department;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Session;
 
 class DepartmentController extends Controller
 {
@@ -19,17 +20,17 @@ class DepartmentController extends Controller
         return view('department.add');
     }
 //
-//    public function insert(Request $r){
-//
-//        $department = new Department();
-//        $department->DepartmentName = $r->DepartmentName;
-//        $department->save();
-//
-//        Session::flash('message','Department added successfully!!');
-//        Session::flash('alert-class','alert-success');
-//        return redirect()->route('department');
-//
-//    }
+    public function insert(Request $r){
+
+        $department = new Department();
+        $department->DepartmentName = $r->DepartmentName;
+        $department->save();
+
+        Session::flash('message','Department added successfully!!');
+        Session::flash('alert-class','alert-success');
+        return redirect()->route('department');
+
+    }
 //
 //    public function update(Request $r)
 //    {
