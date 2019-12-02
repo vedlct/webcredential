@@ -25,6 +25,21 @@ class PlatformController extends Controller
         return redirect()->route('platform');
 
     }
+
+    public function edit_platform(Request $r){
+
+        $platform = Platform::find($r->PlatformId);
+
+        return view('platform.platform_update')->with('platform', $platform);
+    }
+
+    public function update_platform(Request $r){
+        $platform = Platform::find($r->PlatformId);
+        $platform->PlatformName = $r->PlatformName;
+        $platform->save();
+        Session::flash('message', 'Platform Updated!');
+        return back();
+    }
 //
 //    public function update(Request $r)
 //    {

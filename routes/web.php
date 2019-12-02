@@ -31,6 +31,9 @@ Route::get('/platform', 'PlatformController@index')->name('platform');
 Route::post('/platform/insert', 'PlatformController@insert')->name('platform.insert');
 Route::post('/platformShow', 'PlatformController@showplatform')->name('platform.show');
 Route::post('/platform-delete', 'PlatformController@deleteplatform')->name('platform.delete');
+Route::post('/platform-edit', 'PlatformController@edit_platform')->name('platform.edit');
+Route::post('/platform-update',   'PlatformController@update_platform')->name('platform.update');
+
 
 
 

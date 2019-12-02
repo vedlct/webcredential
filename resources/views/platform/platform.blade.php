@@ -103,22 +103,22 @@
                 ],
             });
         });
-        {{--function edit_data(x) {--}}
-        {{--    id = $(x).data('panel-id2');--}}
-        {{--    $.ajax({--}}
-        {{--        type: 'POST',--}}
-        {{--        url: "{!! route('service.edit') !!}",--}}
-        {{--        cache: false,--}}
-        {{--        data: {--}}
-        {{--            _token: "{{csrf_token()}}",--}}
-        {{--            'id': id,--}}
-        {{--        },--}}
-        {{--        success: function (data) {--}}
-        {{--            $('#editModalBody').html(data);--}}
-        {{--            $('#editModal').modal('show');--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--}--}}
+        function edit_data(x) {
+            id = $(x).data('panel-id2');
+            $.ajax({
+                type: 'POST',
+                url: "{!! route('platform.edit') !!}",
+                cache: false,
+                data: {
+                    _token: "{{csrf_token()}}",
+                    'PlatformId': id,
+                },
+                success: function (data) {
+                    $('#editModalBody').html(data);
+                    $('#editModal').modal('show');
+                }
+            });
+        }
         function delete_data(x) {
             var id = $(x).data('panel-id');
             $.confirm({
