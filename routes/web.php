@@ -25,6 +25,13 @@ Route::post('/department/insert', 'DepartmentController@insert')->name('departme
 Route::post('/departmentShow', 'DepartmentController@showDepartment')->name('department.show');
 Route::post('/department-delete', 'DepartmentController@deletedepartment')->name('department.delete');
 
+//--------------------platform----------
+
+Route::get('/platform', 'PlatformController@index')->name('platform');
+Route::post('/platform/insert', 'PlatformController@insert')->name('platform.insert');
+Route::post('/platformShow', 'PlatformController@showplatform')->name('platform.show');
+Route::post('/platform-delete', 'PlatformController@deleteplatform')->name('platform.delete');
+
 
 
 
