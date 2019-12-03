@@ -34,6 +34,7 @@ class PlatformController extends Controller
     }
 
     public function update_platform(Request $r){
+
         $platform = Platform::find($r->PlatformId);
         $platform->PlatformName = $r->PlatformName;
         $platform->save();
@@ -68,8 +69,8 @@ class PlatformController extends Controller
 
     public function deleteplatform(Request $r)
     {
-        $platfrom = Platform::findorFail($r->PlatformId);
-        $platfrom->delete();
+        $platform = Platform::findorFail($r->PlatformId);
+        $platform->delete();
 
     }
 
