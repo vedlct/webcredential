@@ -24,6 +24,8 @@ Route::post('/department/insert', 'DepartmentController@insert')->name('departme
 //Route::resource('/department','DepartmentController@insert');
 Route::post('/departmentShow', 'DepartmentController@showDepartment')->name('department.show');
 Route::post('/department-delete', 'DepartmentController@deletedepartment')->name('department.delete');
+Route::post('/department-edit', 'DepartmentController@edit_department')->name('department.edit');
+Route::post('/department-update/{DepartmentId}','DepartmentController@update_department')->name('department.update');
 
 //--------------------platform----------
 
@@ -32,7 +34,17 @@ Route::post('/platform/insert', 'PlatformController@insert')->name('platform.ins
 Route::post('/platformShow', 'PlatformController@showplatform')->name('platform.show');
 Route::post('/platform-delete', 'PlatformController@deleteplatform')->name('platform.delete');
 Route::post('/platform-edit', 'PlatformController@edit_platform')->name('platform.edit');
-Route::post('/platform-update',   'PlatformController@update_platform')->name('platform.update');
+Route::post('/platform-update/{PlatformId}',   'PlatformController@update_platform')->name('platform.update');
+
+
+//------------------------Credential-------------
+
+Route::get('/credential', 'CredentialController@index')->name('credential');
+Route::post('/credential/insert', 'CredentialController@insert')->name('credential.insert');
+Route::post('/credentialShow', 'CredentialController@showcredential')->name('credential.show');
+//Route::post('/credential-delete', 'CredentialController@deletecredential')->name('credential.delete');
+//Route::post('/credential-edit', 'CredentialController@edit_credential')->name('credential.edit');
+//Route::post('/credential-update/{Credentiald}','Credential@update_credential')->name('credential.update');
 
 
 

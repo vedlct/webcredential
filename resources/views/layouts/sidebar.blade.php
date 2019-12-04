@@ -12,6 +12,9 @@
                 <li class="{{ Route::is('platform') ? 'active' : '' }}">
                     <a href="{{ route('platform') }}"><i class="fas fa-building"></i> <span>Platfrom</span></a>
                 </li>
+                <li class="{{ Route::is('credential') ? 'active' : '' }}">
+                    <a href="{{ route('credential') }}"><i class="fas fa-building"></i> <span>Credential</span></a>
+                </li>
 
 {{--                <li class="{{ Route::is(('platform')) ? 'active' : '' }
 

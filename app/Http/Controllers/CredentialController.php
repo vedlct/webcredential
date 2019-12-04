@@ -2,29 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Credential;
 use App\Platform;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Session;
 
 
-class PlatformController extends Controller
+class CredentialController extends Controller
 {
     public function index(){
-        return view('platform.platform');
+        return view ('credential.credential');
     }
 
     public function insert(Request $r){
 
-        $rules = [
-            'PlatformName' => 'required|regex:/^[a-zA-Z]+$/u|max:255|',
 
-        ];
-        $this->validate($r, $rules);
 
-        $platform = new Platform();
-        $platform->PlatformName = $r->PlatformName;
-        $platform->save();
+        $credential = new Credential();
+        $credential->Email = $r->Email;
+        $credential->Username = $r->Username;
+        $credential->Password = $r->Password;
+        $credential->RecoveryPhone = $r->RecoveryPhone;
+        $credential->WhoElseHasAccess = $r->WhoElseHasAccess;
+        $credential->WebsiteUrl = $r->WebsiteUrl;
+        $credential->fkPlatformid = $r->PlatformId;
+        $credential->save();
 
         Session::flash('message','Platform added successfully!!');
         Session::flash('alert-class','alert-success');
@@ -72,9 +76,10 @@ class PlatformController extends Controller
 //        return view('department.edit', compact('department'));
 //    }
 
-    public function showplatform(){
-        $platformInfo = Platform::all();
-        $datatables = DataTables::of($platformInfo);
+    public function showcredential(){
+        $credentialinfo = Credential::select(DB::raw("(`platform`.`PlatformName`) as platformname"), 'fkPlatformid','credential.Email','credential.Username','credential.Password','credential.RecoveryPhone','credential.WhoElseHasAccess','credential.WebsiteUrl')
+        ->leftjoin('platform','fkPlatformid','PlatformId')->get();
+        $datatables = DataTables::of($credentialinfo);
         return $datatables->make(true);
 
 
