@@ -19,6 +19,8 @@ Route::post('/welcome-show', 'WelcomeController@showWelcome')->name('welcome.sho
 Route::view('admin/login', 'login');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//---------------------------Department------------------
 Route::get('/department', 'DepartmentController@index')->name('department');
 Route::post('/department/insert', 'DepartmentController@insert')->name('department.insert');
 //Route::resource('/department','DepartmentController@insert');
@@ -42,9 +44,16 @@ Route::post('/platform-update/{PlatformId}',   'PlatformController@update_platfo
 Route::get('/credential', 'CredentialController@index')->name('credential');
 Route::post('/credential/insert', 'CredentialController@insert')->name('credential.insert');
 Route::post('/credentialShow', 'CredentialController@showcredential')->name('credential.show');
-//Route::post('/credential-delete', 'CredentialController@deletecredential')->name('credential.delete');
-//Route::post('/credential-edit', 'CredentialController@edit_credential')->name('credential.edit');
-//Route::post('/credential-update/{Credentiald}','Credential@update_credential')->name('credential.update');
+Route::post('/credential-delete', 'CredentialController@deletecredential')->name('credential.delete');
+Route::post('/credential-edit', 'CredentialController@edit_credential')->name('credential.edit');
+Route::post('/credential-update/{Credentialid}','CredentialController@update_credential')->name('credential.update');
+
+
+//----------------------------User Management--------------
+
+Route::get('/user', 'UserController@index')->name('user');
+Route::get('/admin', 'AdminController@index')->name('admin');
+
 
 
 

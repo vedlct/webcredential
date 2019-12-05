@@ -12,12 +12,23 @@ use Session;
 
 class CredentialController extends Controller
 {
-    public function index(){
-        return view ('credential.credential');
+    public function index()
+    {
+        $platforms = Platform::get();
+        return view('credential.credential', compact('platforms'));
     }
 
-    public function insert(Request $r){
-
+    public function insert(Request $r)
+    {
+//
+//        $rules=[
+//            'email' => 'email',
+//            'Username' => 'required|regex:/^[a-zA-Z]+$/u|max:255|',
+//            'Password' => '',
+//            'RecoveryPhone' => '',
+//            'WhoElseHasAccess' => '',
+//            'WebsiteUrl' => '',
+//        ];
 
 
         $credential = new Credential();
@@ -30,65 +41,63 @@ class CredentialController extends Controller
         $credential->fkPlatformid = $r->PlatformId;
         $credential->save();
 
-        Session::flash('message','Platform added successfully!!');
-        Session::flash('alert-class','alert-success');
-        return redirect()->route('platform');
+        Session::flash('message', 'Credential added successfully!!');
+        Session::flash('alert-class', 'alert-success');
+        return redirect()->route('credential');
 
     }
 
-    public function edit_platform(Request $r){
+    public function edit_credential(Request $r)
 
-        $platform = Platform::find($r->PlatformId);
+    {
 
-        return view('platform.platform_update')->with('platform', $platform);
+        $platforms = Platform::get();
+
+        $credential = Credential::find($r->Credentialid);
+//        DD($r->Credentialid);
+//        return $credential;
+
+        return view('credential.credential_update',compact('credential','platforms'));
     }
 
-    public function update_platform(Request $r){
+    public function update_credential(Request $r)
+    {
 
-        $rules = [
-            'PlatformName' => 'required|regex:/^[a-zA-Z]+$/u|max:255|',
+//        $rules = [
+//            'PlatformName' => 'required|regex:/^[a-zA-Z]+$/u|max:255|',
+//
+//        ];
+//        $this->validate($r, $rules);
 
-        ];
-        $this->validate($r, $rules);
 
-
-        $platform = Platform::find($r->PlatformId);
-        $platform->PlatformName = $r->PlatformName;
-        $platform->save();
-        Session::flash('message', 'Platform Updated!');
+        $credential = Credential::find($r->Credentialid);
+//        $credential->PlatformName = $r->PlatformName;
+        $credential->Email = $r->Email;
+        $credential->Username = $r->Username;
+        $credential->Password = $r->Password;
+        $credential->RecoveryPhone = $r->RecoveryPhone;
+        $credential->WhoElseHasAccess = $r->WhoElseHasAccess;
+        $credential->WebsiteUrl = $r->WebsiteUrl;
+        Session::flash('message', 'Credential Updated!');
         return back();
     }
-//
-//    public function update(Request $r)
-//    {
-//        //$userType=UserType::where('usertypeName','patient')->first();
-//        $department = Department::findOrFail($r->DepartmentId);
-//        $department->DepartmentName = $r->DepartmentName;
-//
-//        $department->save();
-//        Session::flash('message','Department updates successfully!!');
-//        Session::flash('alert-class','alert-success');
-//    }
-//
-//    public function editPatient($id)
-//    {
-//        $department = Department::findOrFail($id);
-//        return view('department.edit', compact('department'));
-//    }
 
-    public function showcredential(){
-        $credentialinfo = Credential::select(DB::raw("(`platform`.`PlatformName`) as platformname"), 'fkPlatformid','credential.Email','credential.Username','credential.Password','credential.RecoveryPhone','credential.WhoElseHasAccess','credential.WebsiteUrl')
-        ->leftjoin('platform','fkPlatformid','PlatformId')->get();
+
+    public function showcredential()
+    {
+        $credentialinfo = Credential::select(DB::raw("(`platform`.`PlatformName`) as platformname"),'Credentialid', 'fkPlatformid', 'credential.Email', 'credential.Username', 'credential.Password', 'credential.RecoveryPhone', 'credential.WhoElseHasAccess', 'credential.WebsiteUrl')
+            ->leftjoin('platform', 'fkPlatformid', 'PlatformId')->get();
         $datatables = DataTables::of($credentialinfo);
         return $datatables->make(true);
 
 
     }
 
-    public function deleteplatform(Request $r)
+
+    public function deletecredential(Request $r)
     {
-        $platform = Platform::findorFail($r->PlatformId);
-        $platform->delete();
+        $credential = Credential::findorFail($r->Credentialid);
+        $credential->delete();
 
     }
 
