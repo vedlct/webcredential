@@ -39,10 +39,10 @@
                                     <label>Web Site URL</label>
                                     <input class="form-control" type="text" name="WebsiteUrl" required>
                                 </div>
-{{--                                <div class="form-group">--}}
-{{--                                    <label>Platform Name</label>--}}
-{{--                                    <input class="form-control" type="text" name="fkPlatformid" required>--}}
-{{--                                </div>--}}
+                                <div class="form-group">
+                                    <label>Platform Name</label>
+                                    <input class="form-control" type="text" name="fkPlatformid" required>
+                                </div>
                             </div>
                         </div>
 

@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30fc453c-e1eb-4969-8589-fbacb140d25c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/webcredential.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webcredential.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlatformController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlatformController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/department/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/department/department_update.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/department/department.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/department/department.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/platform/platform.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/platform/platform.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/platform/platform_update.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/platform/platform_update.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +169,7 @@
       <workItem from="1575440192043" duration="14302000" />
       <workItem from="1575458791383" duration="682000" />
       <workItem from="1575459584476" duration="33000" />
-      <workItem from="1575459646915" duration="5755000" />
+      <workItem from="1575459646915" duration="6802000" />
     </task>
     <servers />
   </component>
