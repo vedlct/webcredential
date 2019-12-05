@@ -5,7 +5,7 @@
     <div class="header">
         <div class="header-left">
             <a href="{{ route('welcome') }}" class="logo">
-                <img src="{{ url('public/assets/img/logo.png') }}" width="35" height="35" alt=""> <span>Preclinic</span>
+                <span>Web Credential</span>
             </a>
         </div>
         <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>

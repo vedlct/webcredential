@@ -22,6 +22,12 @@ class DepartmentController extends Controller
 //
     public function insert(Request $r){
 
+        $rules = [
+            'DepartmentName' => 'required|regex:/^[a-zA-Z]+$/u|max:255|',
+
+        ];
+        $this->validate($r, $rules);
+
         $department = new Department();
         $department->DepartmentName = $r->DepartmentName;
         $department->save();
@@ -31,23 +37,31 @@ class DepartmentController extends Controller
         return redirect()->route('department');
 
     }
+
+    public function edit_department(Request $r){
+
+        $department = Department::find($r->DepartmentId);
+
+        return view('department.department_update')->with('department', $department);
+    }
+
+    public function update_department(Request $r){
+
+        $rules = [
+            'DepartmentName' => 'required|regex:/^[a-zA-Z]+$/u|max:255|',
+
+        ];
+        $this->validate($r, $rules);
+
+
+        $department = Department::find($r->DepartmentId);
+        $department->DepartmentName = $r->DepartmentName;
+        $department->save();
+        Session::flash('message', 'Department Updated!');
+        return back();
+    }
 //
-//    public function update(Request $r)
-//    {
-//        //$userType=UserType::where('usertypeName','patient')->first();
-//        $department = Department::findOrFail($r->DepartmentId);
-//        $department->DepartmentName = $r->DepartmentName;
-//
-//        $department->save();
-//        Session::flash('message','Department updates successfully!!');
-//        Session::flash('alert-class','alert-success');
-//    }
-//
-//    public function editPatient($id)
-//    {
-//        $department = Department::findOrFail($id);
-//        return view('department.edit', compact('department'));
-//    }
+
 
     public function showDepartment(){
         $departmentInfo = Department::all();

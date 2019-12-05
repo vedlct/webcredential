@@ -7,9 +7,18 @@
                     <a href="{{ route('welcome') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                 </li>
                 <li class="{{ Route::is('department') ? 'active' : '' }}">
-                    <a href="{{ route('department') }}"><i class="fa fa-user-md"></i> <span>Department </span></a>
+                    <a href="{{ route('department') }}"><i class="fas fa-building"></i> <span>Department </span></a>
                 </li>
-{{--                <li class="{{ Route::is(('platform')) ? 'active' : '' }}">--}}
+                <li class="{{ Route::is('platform') ? 'active' : '' }}">
+                    <a href="{{ route('platform') }}"><i class="fas fa-building"></i> <span>Platfrom</span></a>
+                </li>
+                <li class="{{ Route::is('credential') ? 'active' : '' }}">
+                    <a href="{{ route('credential') }}"><i class="fas fa-building"></i> <span>Credential</span></a>
+                </li>
+
+{{--                <li class="{{ Route::is(('platform')) ? 'active' : '' }
+
+}">--}}
 {{--                    <a href="{{ route('patients') }}"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>--}}
 {{--                </li>--}}
 {{--                <li class="{{ Route::is(('appointment')) ? 'active' : '' }}">--}}
