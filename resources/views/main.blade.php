@@ -21,9 +21,9 @@
 						</span>
                     <span>Profile</span>
                 </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{route('user')}}">User</a>
-                    <a class="dropdown-item" href="{{route('admin')}}">Admin</a>
+{{--                <div class="dropdown-menu">--}}
+{{--                    <a class="dropdown-item" href="{{route('user')}}">User</a>--}}
+{{--                    <a class="dropdown-item" href="{{route('admin')}}">Admin</a>--}}
 
 {{--                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
 {{--                       onclick="event.preventDefault();--}}
@@ -34,16 +34,16 @@
 {{--                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
 {{--                        @csrf--}}
 {{--                    </form>--}}
-                </div>
+{{--                </div>--}}
             </li>
         </ul>
         <div class="dropdown mobile-user-menu float-right">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="{{route('user')}}">User</a>
-                <a class="dropdown-item" href="{{route('admin')}}">Admin</a>
+{{--            <div class="dropdown-menu dropdown-menu-right">--}}
+{{--                <a class="dropdown-item" href="{{route('user')}}">User</a>--}}
+{{--                <a class="dropdown-item" href="{{route('admin')}}">Admin</a>--}}
 
-            </div>
+{{--            </div>--}}
         </div>
     </div>
 

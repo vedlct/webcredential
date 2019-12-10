@@ -51,8 +51,22 @@ Route::post('/credential-update/{Credentialid}','CredentialController@update_cre
 
 //----------------------------User Management--------------
 
-Route::get('/user', 'UserController@index')->name('user');
-Route::get('/admin', 'AdminController@index')->name('admin');
+//Route::get('/user', 'UserController@index')->name('user');
+//Route::get('/admin', 'AdminController@index')->name('admin');
+
+Route::get('/user','UserController@index')->name('user');
+Route::post('/user-show','UserController@showuserlist')->name('user.show');
+
+
+//----------------------------User type--------------
+
+Route::get('/usertype','UsertypeController@index')->name('usertype');
+
+//Route::post('/insert','UsertypeController@insert');
+
+Route::post('/showUsertype','UsertypeController@showusertype')->name('usertype.show');
+
+
 
 
 

@@ -15,6 +15,14 @@
                 <li class="{{ Route::is('credential') ? 'active' : '' }}">
                     <a href="{{ route('credential') }}"><i class="fas fa-building"></i> <span>Credential</span></a>
                 </li>
+                <li class="{{ Route::is('usertype') ? 'active' : '' }}">
+                    <a href="{{ route('usertype') }}"><i class="fas fa-building"></i> <span>Add usertype</span></a>
+                </li>
+                <li class="{{ Route::is('user') ? 'active' : '' }}">
+                    <a href="{{ route('user') }}"><i class="fas fa-building"></i> <span>Add usertype</span></a>
+                </li>
+
+
 
 {{--                <li class="{{ Route::is(('platform')) ? 'active' : '' }
 
