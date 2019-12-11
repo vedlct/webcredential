@@ -12,13 +12,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ route('platform.insert') }}">
+                    <form method="post" action="{{ route('user.insert') }}">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input class="form-control" type="text" name="PlatformName" required>
+                                    <input class="form-control" type="text" name="UserName" required>
                                 </div>
                             </div>
                         </div>
