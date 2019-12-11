@@ -1,6 +1,49 @@
 @extends('main')
 @section('content')
 
+    <div class="modal fade" id="addPlatform" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLabel">Add Userdetails</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{ route('platform.insert') }}">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-control" type="text" name="PlatformName" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if($errors->any())
+                            @foreach($errors->all() as $error)
+
+                                <div class="alert alert-danger">{{ $error}}</div>
+
+                            @endforeach
+
+                        @endif
+                        <div class="m-t-20 text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">Add Platform</button>
+                        </div>
+                    </form>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">

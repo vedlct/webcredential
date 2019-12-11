@@ -56,6 +56,8 @@ Route::post('/credential-update/{Credentialid}','CredentialController@update_cre
 
 Route::get('/user','UserController@index')->name('user');
 Route::post('/user-show','UserController@showuserlist')->name('user.show');
+Route::post('/user-insert','UserController@insert')->name('user.insert');
+
 
 
 //----------------------------User type--------------
