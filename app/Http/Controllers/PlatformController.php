@@ -54,23 +54,7 @@ class PlatformController extends Controller
         Session::flash('message', 'Platform Updated!');
         return back();
     }
-//
-//    public function update(Request $r)
-//    {
-//        //$userType=UserType::where('usertypeName','patient')->first();
-//        $department = Department::findOrFail($r->DepartmentId);
-//        $department->DepartmentName = $r->DepartmentName;
-//
-//        $department->save();
-//        Session::flash('message','Department updates successfully!!');
-//        Session::flash('alert-class','alert-success');
-//    }
-//
-//    public function editPatient($id)
-//    {
-//        $department = Department::findOrFail($id);
-//        return view('department.edit', compact('department'));
-//    }
+
 
     public function showplatform(){
         $platformInfo = Platform::all();

@@ -63,6 +63,13 @@ Route::post('/user-insert','UserController@insert')->name('user.insert');
 //----------------------------User type--------------
 
 Route::get('/usertype','UsertypeController@index')->name('usertype');
+Route::post('/usertype-insert','UsertypeController@insert')->name('usertype.insert');
+Route::post('/usertype-show','UsertypeController@showusertype')->name('usertype.show');
+Route::post('/usertype-delete','UsertypeController@deleteusertype')->name('usertype.delete');
+Route::post('/usertype-edit', 'UsertypeController@edit_usertype')->name('usertype.edit');
+Route::post('/usertype-insert','UsertypeController@insert')->name('usertype.insert');
+Route::post('/usertype-update/{UserTypeId}','UsertypeController@update_usertype')->name('usertype.update');
+
 
 //Route::post('/insert','UsertypeController@insert');
 
