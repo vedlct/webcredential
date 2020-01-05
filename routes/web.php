@@ -16,7 +16,9 @@ Route::get('/', 'WelcomeController@index')->name('welcome');
 
 Route::post('/welcome-show', 'WelcomeController@showWelcome')->name('welcome.show');
 
-Route::view('admin/login', 'login');
+//Route::view('admin/login', 'login');
+
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -55,8 +57,12 @@ Route::post('/credential-update/{Credentialid}','CredentialController@update_cre
 //Route::get('/admin', 'AdminController@index')->name('admin');
 
 Route::get('/user','UserController@index')->name('user');
-Route::post('/user-show','UserController@showuserlist')->name('user.show');
 Route::post('/user-insert','UserController@insert')->name('user.insert');
+Route::post('/user-getlist','UserController@getuserdata')->name('user.getdata');
+Route::post('/user-edit','UserController@edit')->name('user.edit');
+Route::post('/user-update/{id}','UserController@update')->name('user.update');
+Route::post('/user-delete','UserController@deleteuser')->name('user.delete');
+
 
 
 
@@ -74,6 +80,8 @@ Route::post('/usertype-update/{UserTypeId}','UsertypeController@update_usertype'
 //Route::post('/insert','UsertypeController@insert');
 
 Route::post('/showUsertype','UsertypeController@showusertype')->name('usertype.show');
+
+
 
 
 

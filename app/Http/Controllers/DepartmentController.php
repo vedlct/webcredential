@@ -23,7 +23,7 @@ class DepartmentController extends Controller
     public function insert(Request $r){
 
         $rules = [
-            'DepartmentName' => 'required|regex:/^[a-zA-Z]+$/u|max:255|',
+            'DepartmentName' => 'required|',
 
         ];
         $this->validate($r, $rules);
