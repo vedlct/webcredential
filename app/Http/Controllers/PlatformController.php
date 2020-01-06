@@ -10,6 +10,8 @@ use Yajra\DataTables\DataTables;
 
 class PlatformController extends Controller
 {
+
+
     public function index(){
         return view('platform.platform');
     }

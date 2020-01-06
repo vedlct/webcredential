@@ -8,6 +8,8 @@ use Session;
 
 class PageController extends Controller
 {
+
+
     //
     public function index()
     {

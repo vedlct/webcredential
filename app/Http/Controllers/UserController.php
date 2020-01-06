@@ -15,6 +15,8 @@ use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
+
+
     public function index(){
         $usertype = UserType::get();
         $department = Department::get();

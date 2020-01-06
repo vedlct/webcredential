@@ -9,6 +9,8 @@ use Session;
 
 class UsertypeController extends Controller
 {
+
+
     public function index(){
 
         return view('usertype.usertype');

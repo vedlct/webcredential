@@ -12,6 +12,8 @@ use Session;
 
 class CredentialController extends Controller
 {
+
+
     public function index()
     {
         $platforms = Platform::get();
