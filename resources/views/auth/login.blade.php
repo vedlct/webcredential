@@ -1,129 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <title>Web Credential</title>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Login') }}</div>
 
-    <link rel="icon" type="image/png" href="{{url('public')}}/assets/login/images/icons/favicon.ico"/>
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{url('public')}}/assets/login/vendor/bootstrap/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-          href="{{url('public')}}/assets/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-          href="{{url('public')}}/assets/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{url('public')}}/assets/login/vendor/animate/animate.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-          href="{{url('public')}}/assets/login/vendor/css-hamburgers/hamburgers.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-          href="{{url('public')}}/assets/login/vendor/animsition/css/animsition.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{url('public')}}/assets/login/vendor/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-          href="{{url('public')}}/assets/login/vendor/daterangepicker/daterangepicker.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{url('public')}}/assets/login/css/util.css">
-    <link rel="stylesheet" type="text/css" href="{{url('public')}}/assets/login/css/main.css">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-</head>
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-<body>
-
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-            <form class="login100-form validate-form" action="{{ route('welcome') }}" method="post">
-                @csrf
-                <span class="login100-form-title p-b-33">
-						Web Credentials
-					</span>
-
-                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                    <input class="input100" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email"
-                           name="email" value="{{ old('email') }}" placeholder="Email">
-                    @if ($errors->has('email'))
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
                                     </span>
-                    @endif
+                                @enderror
+                            </div>
+                        </div>
 
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-
-                    <span class="focus-input100-1"></span>
-                    <span class="focus-input100-2"></span>
-
-
-                </div>
-
-
-
-                <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-                    <input class="input100" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                           name="pass" placeholder="Password">
-
-                    @if ($errors->has('email'))
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
                                     </span>
-                    @endif
-                    <span class="focus-input100-1"></span>
-                    <span class="focus-input100-2"></span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Login') }}
+                                </button>
+
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="container-login100-form-btn m-t-20">
-                    <button class="login100-form-btn" type="submit">
-                        Sign in
-                    </button>
-                </div>
-
-                <div class="text-center p-t-45 p-b-4">
-						<span class="txt1">
-							Forgot
-						</span>
-
-                    <a href="#" class="txt2 hov1">
-                        Username / Password?
-                    </a>
-                </div>
-
-                <div class="text-center">
-						<span class="txt1">
-							Create an account?
-						</span>
-
-                    <a href="#" class="txt2 hov1">
-                        Sign up
-                    </a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
-
-<script src="{{url('public')}}/assets/login/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-<script src="{{url('public')}}/assets/login/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-<script src="{{url('public')}}/assets/login/vendor/bootstrap/js/popper.js"></script>
-<script src="{{url('public')}}/assets/login/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-<script src="{{url('public')}}/assets/login/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-<script src="{{url('public')}}/assets/login/vendor/daterangepicker/moment.min.js"></script>
-<script src="{{url('public')}}/assets/login/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-<script src="{{url('public')}}/assets/login/vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-<script src="{{url('public')}}/assets/login/js/main.js"></script>
-
-</body>
-
-</html>
+@endsection

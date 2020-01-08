@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Credential;
+use App\Department;
 use App\Platform;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -16,21 +19,14 @@ class CredentialController extends Controller
 
     public function index()
     {
+        $users = User::get();
+        $departments = Department::get();
         $platforms = Platform::get();
-        return view('credential.credential', compact('platforms'));
+        return view('credential.credential', compact('platforms', 'departments', 'users'));
     }
 
     public function insert(Request $r)
     {
-//
-//        $rules=[
-//            'email' => 'email',
-//            'Username' => 'required|regex:/^[a-zA-Z]+$/u|max:255|',
-//            'Password' => '',
-//            'RecoveryPhone' => '',
-//            'WhoElseHasAccess' => '',
-//            'WebsiteUrl' => '',
-//        ];
 
 
         $credential = new Credential();
@@ -49,6 +45,21 @@ class CredentialController extends Controller
 
     }
 
+    public function save(Request $r){
+        $role = new Role();
+
+        $role->fkCredentialid =$r->Credentialid;
+        $role->fkUserId = $r->UserId;
+        $role->save();
+
+        Session::flash('message', 'Role added successfully!!');
+        Session::flash('alert-class', 'alert-success');
+        return redirect()->route('credential');
+
+
+
+    }
+
     public function edit_credential(Request $r)
 
     {
@@ -59,7 +70,7 @@ class CredentialController extends Controller
 //        DD($r->Credentialid);
 //        return $credential;
 
-        return view('credential.credential_update',compact('credential','platforms'));
+        return view('credential.credential_update', compact('credential', 'platforms'));
     }
 
     public function update_credential(Request $r)
@@ -87,7 +98,7 @@ class CredentialController extends Controller
 
     public function showcredential()
     {
-        $credentialinfo = Credential::select(DB::raw("(`platform`.`PlatformName`) as platformname"),'Credentialid', 'fkPlatformid', 'credential.Email', 'credential.Username', 'credential.Password', 'credential.RecoveryPhone', 'credential.WhoElseHasAccess', 'credential.WebsiteUrl')
+        $credentialinfo = Credential::select(DB::raw("(`platform`.`PlatformName`) as platformname"), 'Credentialid', 'fkPlatformid', 'credential.Email', 'credential.Username', 'credential.Password', 'credential.RecoveryPhone', 'credential.WhoElseHasAccess', 'credential.WebsiteUrl')
             ->leftjoin('platform', 'fkPlatformid', 'PlatformId')->get();
         $datatables = DataTables::of($credentialinfo);
         return $datatables->make(true);

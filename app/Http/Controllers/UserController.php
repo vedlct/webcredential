@@ -11,6 +11,7 @@ use App\Usertype;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
+use Session;
 
 
 class UserController extends Controller

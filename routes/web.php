@@ -49,6 +49,11 @@ Route::post('/credentialShow', 'CredentialController@showcredential')->name('cre
 Route::post('/credential-delete', 'CredentialController@deletecredential')->name('credential.delete');
 Route::post('/credential-edit', 'CredentialController@edit_credential')->name('credential.edit');
 Route::post('/credential-update/{Credentialid}','CredentialController@update_credential')->name('credential.update');
+Route::post('/role/save','CredentialController@save')->name('role.save');
+
+//------------------------Role-------------
+
+
 
 
 //----------------------------User Management--------------
@@ -92,3 +97,7 @@ Route::post('/showUsertype','UsertypeController@showusertype')->name('usertype.s
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
