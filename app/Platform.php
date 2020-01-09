@@ -10,4 +10,6 @@ class Platform extends Model
         protected $table = 'platform';
         protected $primaryKey = 'PlatformId';
 
+
+
 }

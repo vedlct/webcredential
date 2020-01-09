@@ -94,65 +94,56 @@
 
     {{--    role set modal --}}
 
-    <div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="exampleModalLabel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Assign Role</h5>
+                    <h5 class="modal-title" id="exampleModalLabel1">Add User roles</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ route('role.save') }}">
+                    <form method="post" action="{{ route('role.insert') }}">
                         {{ csrf_field() }}
-                        <div class="form-group">
-                            <label>Department</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Department</label>
 
 
-                            <select class="select" name="PlatformId" id="PlatformId" class="form-control"
-                                    required>
-                                <option value="">Select</option>
-                                @foreach($departments as $department)
-                                    <option
-                                        value="{{$department->DepartmentId}}">{{$department->DepartmentName}}</option>
-                                @endforeach
-                            </select>
+                                <select class="select" name="PlatformId" id="PlatformId" class="form-control"
+                                        required>
+                                    <option value="">Select</option>
+                                    @foreach($departments as $department)
+                                        <option
+                                            value="{{$department->DepartmentId}}">{{$department->DepartmentName}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
 
 
                         </div>
-                        <div class="form-group">
-                            <label>User</label>
 
+                        <div class="row">
+                            <div class="col-md-12">
 
-                            <select class="select" name="PlatformId" id="PlatformId" class="form-control"
-                                    required>
-                                <option value="">Select</option>
+                                <label>Users</label>
                                 @foreach($users as $user)
-                                    <option
-                                        value="{{$user->UserId}}">{{$user->name}}</option>
-                                @endforeach
-                            </select>
+                                    <td><input type="checkbox" value="{{$user->name}}">{{$user->name}}</td>
+                                    @endforeach
 
 
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="add">
-                                <label class="form-check-label" for="exampleCheck1">Add</label>
                             </div>
 
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="delete">
-                                <label class="form-check-label" for="exampleCheck1">Delete</label>
-                            </div>
+                        </div>
 
 
+                        <div class="m-t-20 text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">Add Role</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -230,7 +221,7 @@
                     // {data: 'platformname', name: 'platformname'},
                     {
                         "data": function (data) {
-                            return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roleModal">\n' +
+                            return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLabel1">\n' +
                                 '  Launch demo modal\n' +
                                 '</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
                                 '&nbsp;&nbsp;<a style="cursor: pointer; color: rgba(236,39,50,0.98)" data-panel-id="' + data.Credentialid + '" onclick="delete_data(this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>&nbsp;&nbsp; <a style="cursor: pointer; color: #4881ecfa" data-panel-id2="' + data.Credentialid + '" onclick="edit_data(this)"><i class="fa fa-edit" aria-hidden="true"></i></a>'

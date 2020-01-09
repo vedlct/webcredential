@@ -9,6 +9,7 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Table;
 use Yajra\DataTables\DataTables;
 use Session;
 
@@ -19,9 +20,9 @@ class CredentialController extends Controller
 
     public function index()
     {
-        $users = User::get();
-        $departments = Department::get();
-        $platforms = Platform::get();
+        $users = User::all();
+        $departments = Department::all();
+        $platforms = Platform::all();
         return view('credential.credential', compact('platforms', 'departments', 'users'));
     }
 
