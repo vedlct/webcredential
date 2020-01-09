@@ -21,9 +21,22 @@ class CredentialController extends Controller
     public function index()
     {
         $users = User::all();
-        $departments = Department::all();
+        $departments = Department::select('DepartmentName','DepartmentId')->get();
         $platforms = Platform::all();
         return view('credential.credential', compact('platforms', 'departments', 'users'));
+    }
+
+    public function getUsers($UserId){
+
+        $users = User::select('UserId','name')->leftjoin('department','fkDepartmentId','DepartmentId')->get();
+
+        return json_encode($users);
+
+
+
+//        $users = User::select('name','UserId')->get();
+//        return json_encode($users);
+
     }
 
     public function insert(Request $r)

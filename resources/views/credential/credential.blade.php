@@ -112,8 +112,8 @@
                                 <label>Department</label>
 
 
-                                <select class="select" name="PlatformId" id="PlatformId" class="form-control"
-                                        required>
+                                <select name="department" id="country" class="form-control input-lg dynamic"
+                                        data-dependent="state"> required>
                                     <option value="">Select</option>
                                     @foreach($departments as $department)
                                         <option
@@ -132,7 +132,7 @@
                                 <label>Users</label>
                                 @foreach($users as $user)
                                     <td><input type="checkbox" value="{{$user->name}}">{{$user->name}}</td>
-                                    @endforeach
+                                @endforeach
 
 
                             </div>
@@ -289,5 +289,33 @@
         @if (count($errors) > 0)
         $('#addService').modal('show');
         @endif
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('select[name="department"]').on('change', function () {
+
+                var fkDepartmentId = $(this).val();
+
+                if (fkDepartmentId) {
+                    $.ajax({
+
+                        url: '{{url('/getUse').'/'}}'+ fkDepartmentId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+
+                        }
+
+
+                    });
+
+                }
+
+            });
+
+
+        });
     </script>
 @endsection

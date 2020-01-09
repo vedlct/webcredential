@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //---------------------------Department------------------
 Route::get('/department', 'DepartmentController@index')->name('department');
+
 Route::post('/department/insert', 'DepartmentController@insert')->name('department.insert');
 //Route::resource('/department','DepartmentController@insert');
 Route::post('/departmentShow', 'DepartmentController@showDepartment')->name('department.show');
@@ -44,6 +45,7 @@ Route::post('/platform-update/{PlatformId}',   'PlatformController@update_platfo
 //------------------------Credential-------------
 
 Route::get('/credential', 'CredentialController@index')->name('credential');
+Route::get('/getUse/{UserId}','CredentialController@getUsers');
 Route::post('/credential/insert', 'CredentialController@insert')->name('credential.insert');
 Route::post('/credentialShow', 'CredentialController@showcredential')->name('credential.show');
 Route::post('/credential-delete', 'CredentialController@deletecredential')->name('credential.delete');
