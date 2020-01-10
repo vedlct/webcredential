@@ -45,6 +45,8 @@ class CredentialController extends Controller
     {
 
 
+
+
         $credential = new Credential();
         $credential->Email = $r->Email;
         $credential->Username = $r->Username;
@@ -64,13 +66,12 @@ class CredentialController extends Controller
     public function save(Request $r){
         $role = new Role();
 
-        $role->fkCredentialid =$r->Credentialid;
-        $role->fkUserId = $r->UserId;
+        $role->fkCredentialid =$r->get('Credentialid');
+        $role->fkUserId = $r->get('UserId');
         $role->save();
 
-        Session::flash('message', 'Role added successfully!!');
-        Session::flash('alert-class', 'alert-success');
-        return redirect()->route('credential');
+        return response()->json( [ 'msg' => 'Post done successfully' ] );
+
 
 
 

@@ -105,7 +105,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ route('role.insert') }}">
+                    <form id="frm" method="post" action="{{ route('role.insert') }}">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-12">
@@ -124,7 +124,6 @@
                             </div>
 
 
-
                         </div>
 
                         <div class="row">
@@ -132,8 +131,8 @@
 
                                 <label>Users</label>
 
-                                    <td><input id="myCheckbox" type="checkbox" name="user" value=""></td>
-
+                                <select name="user" id="user" class="form-control"></select>
+                                <option value="">Users</option>
 
 
                             </div>
@@ -301,15 +300,15 @@
                 if (fkDepartmentId) {
                     $.ajax({
 
-                        url: '{{url('/getUse').'/'}}'+ fkDepartmentId,
+                        url: '{{url('/getUse').'/'}}' + fkDepartmentId,
                         type: 'GET',
                         dataType: 'json',
                         success: function (data) {
                             console.log(data);
 
-                            $('.input[name="user"]').empty();
+                            $('select[name="user"]').empty();
                             $.each(data, function (key, value) {
-                                $('.input[name="user"]').append('<input value="'+key+'">'+value+'>');
+                                $('select[name="user"]').append('<option value="' + key + '">' + value + '</option>');
 
                             });
 
@@ -318,7 +317,7 @@
 
                     });
 
-                } else{
+                } else {
                     $('.check[name="user"]').empty();
                 }
 
@@ -326,5 +325,27 @@
 
 
         });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#submit").click(function (e) {
+                e.preventDefault();
+                department = $("#department").val();
+                user = $("user").val();
+                $.ajax({
+                    type:"POST",
+                    data:{"department":department,"user":user,"_token":"{{csrf_token()}}"},
+                    url:"{{URL::to('role.insert')}}",
+                    success:function(data){
+                        $("#success").html(data);
+                    }
+                });
+
+            });
+        });
+
+
     </script>
 @endsection
