@@ -28,10 +28,12 @@ class CredentialController extends Controller
 
     public function getUsers($UserId){
 
-        $users = User::select('UserId','name')->leftjoin('department','fkDepartmentId','DepartmentId')->get();
+
+        $users = User::where('fkDepartmentId',$UserId)->pluck('name','UserId');
+
+
 
         return json_encode($users);
-
 
 
 //        $users = User::select('name','UserId')->get();

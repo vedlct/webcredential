@@ -112,7 +112,7 @@
                                 <label>Department</label>
 
 
-                                <select name="department" id="country" class="form-control input-lg dynamic"
+                                <select name="department" id="department" class="form-control input-lg dynamic"
                                         data-dependent="state"> required>
                                     <option value="">Select</option>
                                     @foreach($departments as $department)
@@ -124,15 +124,16 @@
                             </div>
 
 
+
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
 
                                 <label>Users</label>
-                                @foreach($users as $user)
-                                    <td><input type="checkbox" value="{{$user->name}}">{{$user->name}}</td>
-                                @endforeach
+
+                                    <td><input id="myCheckbox" type="checkbox" name="user" value=""></td>
+
 
 
                             </div>
@@ -306,11 +307,19 @@
                         success: function (data) {
                             console.log(data);
 
+                            $('.input[name="user"]').empty();
+                            $.each(data, function (key, value) {
+                                $('.input[name="user"]').append('<input value="'+key+'">'+value+'>');
+
+                            });
+
                         }
 
 
                     });
 
+                } else{
+                    $('.check[name="user"]').empty();
                 }
 
             });
