@@ -55,6 +55,7 @@ class CredentialController extends Controller
         $credential->WhoElseHasAccess = $r->WhoElseHasAccess;
         $credential->WebsiteUrl = $r->WebsiteUrl;
         $credential->fkPlatformid = $r->PlatformId;
+
         $credential->save();
 
         Session::flash('message', 'Credential added successfully!!');
@@ -63,14 +64,26 @@ class CredentialController extends Controller
 
     }
 
+    public function set(){
+        $users = User::get();
+        $departments = Department::get();
+        return view ('credential.setrole',compact('users','departments'));
+
+    }
+
     public function save(Request $r){
+        $credential = Credential::find($r->Credentialid);
+
         $role = new Role();
 
-        $role->fkCredentialid =$r->get('Credentialid');
-        $role->fkUserId = $r->get('UserId');
+
+
+        $role->fkCredentialid =$r->Credentialid;
+        $role->fkUserId = $r->UserId;
         $role->save();
 
-        return response()->json( [ 'msg' => 'Post done successfully' ] );
+
+        return back();
 
 
 

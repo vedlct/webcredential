@@ -10,3 +10,7 @@ class Role extends Model
     protected $table = 'role';
     protected $primaryKey = 'RoleId';
 }
+
+{
+
+}

@@ -76,12 +76,12 @@
         </div>
     </div>
     <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="exampleModalLabel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
          aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Credential</h5>
+                    <h5 class="modal-title" id="exampleModalLabel1">Update Credential</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -94,56 +94,18 @@
 
     {{--    role set modal --}}
 
-    <div class="modal fade" id="exampleModalLabel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+    <div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="roleModal"
          aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel1">Add User roles</h5>
+                    <h5 class="modal-title" id="roleModal">Add User roles</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form id="frm" method="post" action="{{ route('role.insert') }}">
-                        {{ csrf_field() }}
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Department</label>
+                <div class="modal-body" id="editModalBody2">
 
-
-                                <select name="department" id="department" class="form-control input-lg dynamic"
-                                        data-dependent="state"> required>
-                                    <option value="">Select</option>
-                                    @foreach($departments as $department)
-                                        <option
-                                            value="{{$department->DepartmentId}}">{{$department->DepartmentName}}</option>
-                                    @endforeach
-                                </select>
-
-                            </div>
-
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <label>Users</label>
-
-                                <select name="user" id="user" class="form-control"></select>
-                                <option value="">Users</option>
-
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="m-t-20 text-center">
-                            <button type="submit" class="btn btn-primary submit-btn">Add Role</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -219,12 +181,20 @@
 
 
                     // {data: 'platformname', name: 'platformname'},
+                    // {
+                    //     "data": function (data) {
+                    //         return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roleModal">\n' +
+                    //             '  Launch demo modal\n' +
+                    //             '</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
+                    //             '&nbsp;&nbsp;<a style="cursor: pointer; color: rgba(236,39,50,0.98)" data-panel-id="' + data.Credentialid + '" onclick="delete_data(this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>&nbsp;&nbsp; <a style="cursor: pointer; color: #4881ecfa" data-panel-id2="' + data.Credentialid + '" onclick="edit_data(this)"><i class="fa fa-edit" aria-hidden="true"></i></a>'
+                    //
+                    //     },
                     {
                         "data": function (data) {
-                            return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLabel1">\n' +
+                            return '<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#roleModal" data-panel-id="' + data.Credentialid + '" onclick="setrole(this)">' +
                                 '  Launch demo modal\n' +
-                                '</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
-                                '&nbsp;&nbsp;<a style="cursor: pointer; color: rgba(236,39,50,0.98)" data-panel-id="' + data.Credentialid + '" onclick="delete_data(this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>&nbsp;&nbsp; <a style="cursor: pointer; color: #4881ecfa" data-panel-id2="' + data.Credentialid + '" onclick="edit_data(this)"><i class="fa fa-edit" aria-hidden="true"></i></a>'
+                                '</button>' +
+                                '&nbsp;&nbsp;<a style="cursor: pointer; color: rgba(236,39,50,0.98)" data-panel-id2="' + data.Credentialid + '" onclick="delete_data(this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>&nbsp;&nbsp; <a style="cursor: pointer; color: #4881ecfa" data-panel-id3="' + data.Credentialid + '" onclick="edit_data(this)"><i class="fa fa-edit" aria-hidden="true"></i></a>'
 
                         },
                         "orderable": false, "searchable": false, "name": "action"
@@ -234,7 +204,7 @@
         });
 
         function edit_data(x) {
-            id = $(x).data('panel-id2');
+            id = $(x).data('panel-id3');
             $.ajax({
                 type: 'POST',
                 url: "{!! route('credential.edit') !!}",
@@ -245,13 +215,33 @@
                 },
                 success: function (data) {
                     $('#editModalBody').html(data);
-                    $('#editModal').modal('show');
+                    $('#exampleModalLabel1').modal('show');
                 }
             });
         }
 
+        function setrole(x) {
+            id = $(x).data('panel-id');
+            alert(id);
+            $.ajax({
+                type: 'POST',
+                url: "{!! route('role.set') !!}",
+                cache: false,
+                data: {
+                    _token: "{{csrf_token()}}",
+                    'Credentialid': id,
+                },
+                success: function (data) {
+                    $('#editModalBody2').var(data);
+                    $('#editModal').modal('show');
+                }
+            });
+
+
+        }
+
         function delete_data(x) {
-            var id = $(x).data('panel-id');
+            var id = $(x).data('panel-id2');
             $.confirm({
                 title: 'Confirm!',
                 content: 'Are you sure want to delete!',
@@ -291,61 +281,61 @@
         @endif
     </script>
 
-    <script>
-        $(document).ready(function () {
-            $('select[name="department"]').on('change', function () {
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            $('select[name="department"]').on('change', function () {--}}
 
-                var fkDepartmentId = $(this).val();
+{{--                var fkDepartmentId = $(this).val();--}}
 
-                if (fkDepartmentId) {
-                    $.ajax({
+{{--                if (fkDepartmentId) {--}}
+{{--                    $.ajax({--}}
 
-                        url: '{{url('/getUse').'/'}}' + fkDepartmentId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log(data);
+{{--                        url: '{{url('/getUse').'/'}}' + fkDepartmentId,--}}
+{{--                        type: 'GET',--}}
+{{--                        dataType: 'json',--}}
+{{--                        success: function (data) {--}}
+{{--                            console.log(data);--}}
 
-                            $('select[name="user"]').empty();
-                            $.each(data, function (key, value) {
-                                $('select[name="user"]').append('<option value="' + key + '">' + value + '</option>');
+{{--                            $('select[name="user"]').empty();--}}
+{{--                            $.each(data, function (key, value) {--}}
+{{--                                $('select[name="user"]').append('<option value="' + key + '">' + value + '</option>');--}}
 
-                            });
+{{--                            });--}}
 
-                        }
-
-
-                    });
-
-                } else {
-                    $('.check[name="user"]').empty();
-                }
-
-            });
+{{--                        }--}}
 
 
-        });
-    </script>
+{{--                    });--}}
 
-    <script>
+{{--                } else {--}}
+{{--                    $('.check[name="user"]').empty();--}}
+{{--                }--}}
 
-        $(document).ready(function () {
-            $("#submit").click(function (e) {
-                e.preventDefault();
-                department = $("#department").val();
-                user = $("user").val();
-                $.ajax({
-                    type:"POST",
-                    data:{"department":department,"user":user,"_token":"{{csrf_token()}}"},
-                    url:"{{URL::to('role.insert')}}",
-                    success:function(data){
-                        $("#success").html(data);
-                    }
-                });
-
-            });
-        });
+{{--            });--}}
 
 
-    </script>
+{{--        });--}}
+{{--    </script>--}}
+
+{{--    <script>--}}
+
+{{--        $(document).ready(function () {--}}
+{{--            $("#submit").click(function (e) {--}}
+{{--                e.preventDefault();--}}
+{{--                department = $("#department").val();--}}
+{{--                user = $("user").val();--}}
+{{--                $.ajax({--}}
+{{--                    type:"POST",--}}
+{{--                    data:{"department":department,"user":user,"_token":"{{csrf_token()}}"},--}}
+{{--                    url:"{{URL::to('role.insert')}}",--}}
+{{--                    success:function(data){--}}
+{{--                        $("#success").html(data);--}}
+{{--                    }--}}
+{{--                });--}}
+
+{{--            });--}}
+{{--        });--}}
+
+
+{{--    </script>--}}
 @endsection
