@@ -180,24 +180,23 @@
                     {data: 'platformname', name: 'platformname'},
 
 
-                    // {data: 'platformname', name: 'platformname'},
-                    // {
-                    //     "data": function (data) {
-                    //         return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roleModal">\n' +
-                    //             '  Launch demo modal\n' +
-                    //             '</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' +
-                    //             '&nbsp;&nbsp;<a style="cursor: pointer; color: rgba(236,39,50,0.98)" data-panel-id="' + data.Credentialid + '" onclick="delete_data(this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>&nbsp;&nbsp; <a style="cursor: pointer; color: #4881ecfa" data-panel-id2="' + data.Credentialid + '" onclick="edit_data(this)"><i class="fa fa-edit" aria-hidden="true"></i></a>'
-                    //
-                    //     },
                     {
                         "data": function (data) {
-                            return '<button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#roleModal" data-panel-id="' + data.Credentialid + '" onclick="setrole(this)">' +
-                                '  Launch demo modal\n' +
-                                '</button>' +
-                                '&nbsp;&nbsp;<a style="cursor: pointer; color: rgba(236,39,50,0.98)" data-panel-id2="' + data.Credentialid + '" onclick="delete_data(this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>&nbsp;&nbsp; <a style="cursor: pointer; color: #4881ecfa" data-panel-id3="' + data.Credentialid + '" onclick="edit_data(this)"><i class="fa fa-edit" aria-hidden="true"></i></a>'
+                            return '<button type="button" id="roleButton" class="btn btn-primary" data-toggle="modal"  data-target="#roleModal" data-panel-id="' + data.Credentialid + '" onclick="setrole(this)">' +
+                                '  Set Roles\n' +
+                                '</button> ';
 
                         },
-                        "orderable": false, "searchable": false, "name": "action"
+
+                    },
+
+
+                    {
+                        "data": function (data) {
+                            return '&nbsp;&nbsp;<a style="cursor: pointer; color: rgba(236,39,50,0.98)" data-panel-id2="' + data.Credentialid + '" onclick="delete_data(this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>&nbsp;&nbsp; <a style="cursor: pointer; color: #4881ecfa" data-panel-id3="' + data.Credentialid + '" onclick="edit_data(this)"><i class="fa fa-edit" aria-hidden="true"></i></a>';
+
+                        },
+
                     },
                 ],
             });
@@ -232,6 +231,7 @@
                     'Credentialid': id,
                 },
                 success: function (data) {
+                    // $('#success').html(data);
                     $('#editModalBody2').var(data);
                     $('#editModal').modal('show');
                 }
@@ -239,6 +239,9 @@
 
 
         }
+
+
+
 
         function delete_data(x) {
             var id = $(x).data('panel-id2');
@@ -281,61 +284,61 @@
         @endif
     </script>
 
-{{--    <script>--}}
-{{--        $(document).ready(function () {--}}
-{{--            $('select[name="department"]').on('change', function () {--}}
+    {{--    <script>--}}
+    {{--        $(document).ready(function () {--}}
+    {{--            $('select[name="department"]').on('change', function () {--}}
 
-{{--                var fkDepartmentId = $(this).val();--}}
+    {{--                var fkDepartmentId = $(this).val();--}}
 
-{{--                if (fkDepartmentId) {--}}
-{{--                    $.ajax({--}}
+    {{--                if (fkDepartmentId) {--}}
+    {{--                    $.ajax({--}}
 
-{{--                        url: '{{url('/getUse').'/'}}' + fkDepartmentId,--}}
-{{--                        type: 'GET',--}}
-{{--                        dataType: 'json',--}}
-{{--                        success: function (data) {--}}
-{{--                            console.log(data);--}}
+    {{--                        url: '{{url('/getUse').'/'}}' + fkDepartmentId,--}}
+    {{--                        type: 'GET',--}}
+    {{--                        dataType: 'json',--}}
+    {{--                        success: function (data) {--}}
+    {{--                            console.log(data);--}}
 
-{{--                            $('select[name="user"]').empty();--}}
-{{--                            $.each(data, function (key, value) {--}}
-{{--                                $('select[name="user"]').append('<option value="' + key + '">' + value + '</option>');--}}
+    {{--                            $('select[name="user"]').empty();--}}
+    {{--                            $.each(data, function (key, value) {--}}
+    {{--                                $('select[name="user"]').append('<option value="' + key + '">' + value + '</option>');--}}
 
-{{--                            });--}}
+    {{--                            });--}}
 
-{{--                        }--}}
-
-
-{{--                    });--}}
-
-{{--                } else {--}}
-{{--                    $('.check[name="user"]').empty();--}}
-{{--                }--}}
-
-{{--            });--}}
+    {{--                        }--}}
 
 
-{{--        });--}}
-{{--    </script>--}}
+    {{--                    });--}}
 
-{{--    <script>--}}
+    {{--                } else {--}}
+    {{--                    $('.check[name="user"]').empty();--}}
+    {{--                }--}}
 
-{{--        $(document).ready(function () {--}}
-{{--            $("#submit").click(function (e) {--}}
-{{--                e.preventDefault();--}}
-{{--                department = $("#department").val();--}}
-{{--                user = $("user").val();--}}
-{{--                $.ajax({--}}
-{{--                    type:"POST",--}}
-{{--                    data:{"department":department,"user":user,"_token":"{{csrf_token()}}"},--}}
-{{--                    url:"{{URL::to('role.insert')}}",--}}
-{{--                    success:function(data){--}}
-{{--                        $("#success").html(data);--}}
-{{--                    }--}}
-{{--                });--}}
-
-{{--            });--}}
-{{--        });--}}
+    {{--            });--}}
 
 
-{{--    </script>--}}
+    {{--        });--}}
+    {{--    </script>--}}
+
+    {{--    <script>--}}
+
+    {{--        $(document).ready(function () {--}}
+    {{--            $("#submit").click(function (e) {--}}
+    {{--                e.preventDefault();--}}
+    {{--                department = $("#department").val();--}}
+    {{--                user = $("user").val();--}}
+    {{--                $.ajax({--}}
+    {{--                    type:"POST",--}}
+    {{--                    data:{"department":department,"user":user,"_token":"{{csrf_token()}}"},--}}
+    {{--                    url:"{{URL::to('role.insert')}}",--}}
+    {{--                    success:function(data){--}}
+    {{--                        $("#success").html(data);--}}
+    {{--                    }--}}
+    {{--                });--}}
+
+    {{--            });--}}
+    {{--        });--}}
+
+
+    {{--    </script>--}}
 @endsection

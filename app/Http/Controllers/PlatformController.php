@@ -38,7 +38,7 @@ class PlatformController extends Controller
 
         $platform = Platform::find($r->PlatformId);
 
-        return view('platform.platform_update')->with('platform', $platform);
+        return view('platform.platform_update',compact('platform'));
     }
 
     public function update_platform(Request $r){

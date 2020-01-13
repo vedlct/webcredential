@@ -21,16 +21,17 @@ class CredentialController extends Controller
     public function index()
     {
         $users = User::all();
-        $departments = Department::select('DepartmentName','DepartmentId')->get();
+        $departments = Department::select('DepartmentName', 'DepartmentId')->get();
         $platforms = Platform::all();
-        return view('credential.credential', compact('platforms', 'departments', 'users'));
+        $credential = Credential::all();
+        return view('credential.credential', compact('platforms', 'departments', 'users', 'credential'));
     }
 
-    public function getUsers($UserId){
+    public function getUsers($UserId)
+    {
 
 
-        $users = User::where('fkDepartmentId',$UserId)->pluck('name','UserId');
-
+        $users = User::where('fkDepartmentId', $UserId)->pluck('name', 'UserId');
 
 
         return json_encode($users);
@@ -43,8 +44,6 @@ class CredentialController extends Controller
 
     public function insert(Request $r)
     {
-
-
 
 
         $credential = new Credential();
@@ -64,31 +63,34 @@ class CredentialController extends Controller
 
     }
 
-    public function set(){
+    public function set(Request $r)
+    {
+        $credentials = Credential::find($r->Credentialid);
         $users = User::get();
         $departments = Department::get();
-        return view ('credential.setrole',compact('users','departments'));
+        return view('credential.setrole', compact('credentials','users','departments'));
+
 
     }
 
-    public function save(Request $r){
-        $credential = Credential::find($r->Credentialid);
+
+    public function save(Request $r)
+    {
+
 
         $role = new Role();
 
 
-
-        $role->fkCredentialid =$r->Credentialid;
-        $role->fkUserId = $r->UserId;
-        $role->save();
-
-
-        return back();
+//        $role->fkCredentialid = $r->Credentialid;
+//        $role->fkUserId = $r->UserId;
+//        $role->save();
 
 
+        return $r->Credentialid;
 
 
     }
+
 
     public function edit_credential(Request $r)
 
@@ -97,8 +99,7 @@ class CredentialController extends Controller
         $platforms = Platform::get();
 
         $credential = Credential::find($r->Credentialid);
-//        DD($r->Credentialid);
-//        return $credential;
+
 
         return view('credential.credential_update', compact('credential', 'platforms'));
     }
@@ -106,15 +107,8 @@ class CredentialController extends Controller
     public function update_credential(Request $r)
     {
 
-//        $rules = [
-//            'PlatformName' => 'required|regex:/^[a-zA-Z]+$/u|max:255|',
-//
-//        ];
-//        $this->validate($r, $rules);
-
 
         $credential = Credential::find($r->Credentialid);
-//        $credential->PlatformName = $r->PlatformName;
         $credential->Email = $r->Email;
         $credential->Username = $r->Username;
         $credential->Password = $r->Password;

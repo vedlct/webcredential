@@ -1,4 +1,4 @@
-<form  method="post"  action="{{ route('role.save',$credential->Credentialid)}}" name="Credentialid">
+<form  method="post"  action="{{ route('role.set',$credentials->Credentialid)}}" name="Credentialid">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-12">
