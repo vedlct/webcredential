@@ -9,9 +9,9 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Table;
 use Yajra\DataTables\DataTables;
 use Session;
+use function foo\func;
 
 
 class CredentialController extends Controller
@@ -63,15 +63,7 @@ class CredentialController extends Controller
 
     }
 
-    public function set(Request $r)
-    {
-        $credentials = Credential::find($r->Credentialid);
-        $users = User::get();
-        $departments = Department::get();
-        return view('credential.setrole', compact('credentials','users','departments'));
 
-
-    }
 
 
     public function save(Request $r)
@@ -81,12 +73,15 @@ class CredentialController extends Controller
         $role = new Role();
 
 
-//        $role->fkCredentialid = $r->Credentialid;
-//        $role->fkUserId = $r->UserId;
-//        $role->save();
+        $role->fkCredentialid = $r->ccid;
+        $role->fkUserId = $r->UserId;
+        $role->save();
 
 
-        return $r->Credentialid;
+                return back();
+
+
+
 
 
     }
@@ -124,8 +119,14 @@ class CredentialController extends Controller
     {
         $credentialinfo = Credential::select(DB::raw("(`platform`.`PlatformName`) as platformname"), 'Credentialid', 'fkPlatformid', 'credential.Email', 'credential.Username', 'credential.Password', 'credential.RecoveryPhone', 'credential.WhoElseHasAccess', 'credential.WebsiteUrl')
             ->leftjoin('platform', 'fkPlatformid', 'PlatformId')->get();
-        $datatables = DataTables::of($credentialinfo);
-        return $datatables->make(true);
+        $datatables = DataTables::of($credentialinfo)
+        ->addColumn('checkbox', function (){
+            return '<input type="checkbox" name="sample" value="">';
+
+        });
+        return $datatables
+            ->rawColumns(['checkbox'])
+        ->make(true);
 
 
     }

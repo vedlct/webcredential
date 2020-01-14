@@ -106,6 +106,63 @@
                 </div>
                 <div class="modal-body" id="editModalBody2">
 
+
+                    <form method="post" action="{{ route('role.save')}}">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="hidden" id="ccid" name="ccid">
+                                <label>Department</label>
+
+
+                                <select name="DepartmentId" id="department" class="form-control input-lg dynamic"
+                                        data-dependent="state"> required>
+                                    <option value="">Select</option>
+                                    @foreach($departments as $department)
+                                        <option
+                                            value="{{$department->DepartmentId}}">{{$department->DepartmentName}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+
+
+                                <label>Users</label>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                @foreach($users as $user)
+                                    <td><input name="UserId" type="checkbox" value="{{$user->UserId}}">{{$user->name}}
+                                    </td>
+                                    <br>
+
+                                @endforeach
+
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="m-t-20 text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">Add Role</button>
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
         </div>
@@ -130,6 +187,7 @@
                 <table class="table table-striped custom-table" id="myTable">
                     <thead>
                     <tr>
+                        <th>Select</th>
                         <th>Email</th>
                         <th>Username</th>
                         <th>Password</th>
@@ -171,6 +229,7 @@
                     },
                 },
                 columns: [
+                    {data: 'checkbox', name:'checkbox'},
                     {data: 'Email', name: 'Email'},
                     {data: 'Username', name: 'Username'},
                     {data: 'Password', name: 'Password'},
@@ -220,27 +279,8 @@
         }
 
         function setrole(x) {
-            id = $(x).data('panel-id');
-            alert(id);
-            $.ajax({
-                type: 'POST',
-                url: "{!! route('role.set') !!}",
-                cache: false,
-                data: {
-                    _token: "{{csrf_token()}}",
-                    'Credentialid': id,
-                },
-                success: function (data) {
-                    // $('#success').html(data);
-                    $('#editModalBody2').var(data);
-                    $('#editModal').modal('show');
-                }
-            });
-
-
+            $('#ccid').val($(x).data('panel-id'));
         }
-
-
 
 
         function delete_data(x) {
@@ -284,61 +324,5 @@
         @endif
     </script>
 
-    {{--    <script>--}}
-    {{--        $(document).ready(function () {--}}
-    {{--            $('select[name="department"]').on('change', function () {--}}
 
-    {{--                var fkDepartmentId = $(this).val();--}}
-
-    {{--                if (fkDepartmentId) {--}}
-    {{--                    $.ajax({--}}
-
-    {{--                        url: '{{url('/getUse').'/'}}' + fkDepartmentId,--}}
-    {{--                        type: 'GET',--}}
-    {{--                        dataType: 'json',--}}
-    {{--                        success: function (data) {--}}
-    {{--                            console.log(data);--}}
-
-    {{--                            $('select[name="user"]').empty();--}}
-    {{--                            $.each(data, function (key, value) {--}}
-    {{--                                $('select[name="user"]').append('<option value="' + key + '">' + value + '</option>');--}}
-
-    {{--                            });--}}
-
-    {{--                        }--}}
-
-
-    {{--                    });--}}
-
-    {{--                } else {--}}
-    {{--                    $('.check[name="user"]').empty();--}}
-    {{--                }--}}
-
-    {{--            });--}}
-
-
-    {{--        });--}}
-    {{--    </script>--}}
-
-    {{--    <script>--}}
-
-    {{--        $(document).ready(function () {--}}
-    {{--            $("#submit").click(function (e) {--}}
-    {{--                e.preventDefault();--}}
-    {{--                department = $("#department").val();--}}
-    {{--                user = $("user").val();--}}
-    {{--                $.ajax({--}}
-    {{--                    type:"POST",--}}
-    {{--                    data:{"department":department,"user":user,"_token":"{{csrf_token()}}"},--}}
-    {{--                    url:"{{URL::to('role.insert')}}",--}}
-    {{--                    success:function(data){--}}
-    {{--                        $("#success").html(data);--}}
-    {{--                    }--}}
-    {{--                });--}}
-
-    {{--            });--}}
-    {{--        });--}}
-
-
-    {{--    </script>--}}
 @endsection

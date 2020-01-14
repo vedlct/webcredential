@@ -53,7 +53,7 @@ Route::post('/credential-edit', 'CredentialController@edit_credential')->name('c
 Route::post('/credential-update/{Credentialid}','CredentialController@update_credential')->name('credential.update');
 Route::post('/role-set','CredentialController@set')->name('role.set');
 Route::post('/role-save','CredentialController@save')->name('role.save');
-Route::get('test', 'CredentialController@getid');
+
 
 
 //------------------------Role-------------

@@ -1,4 +1,4 @@
-<form  method="post"  action="{{ route('role.set',$credentials->Credentialid)}}" name="Credentialid">
+<form  method="post"  action="{{ route('role.save',$credentials->Credentialid)}}" name="Credentialid">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-12">
@@ -24,14 +24,9 @@
 
             <label>Users</label>
 
-            <select name="UserId" id="user" class="form-control input-lg"
-            > required>
-                <option value="">Select</option>
-                @foreach($users as $user)
-                    <option
-                        value="{{$user->UserId}}">{{$user->name}}</option>
-                @endforeach
-            </select>
+            @foreach($users as $user)
+                <td><input type="checkbox" value="{{$user->name}}">{{$user->name}}</td>
+            @endforeach
 
 
         </div>
