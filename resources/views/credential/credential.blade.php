@@ -139,12 +139,16 @@
                                 <div class="row">
                                     <div class="col-md-12">
 
-                                @foreach($users as $user)
-                                    <td><input name="UserId" type="checkbox" value="{{$user->UserId}}">{{$user->name}}
-                                    </td>
-                                    <br>
+{{--                                @foreach($users as $user)--}}
+{{--                                    <td><input name="UserId" type="checkbox" value="{{$user->UserId}}">{{$user->name}}--}}
+{{--                                    </td>--}}
+{{--                                    <br>--}}
 
-                                @endforeach
+{{--                                @endforeach--}}
+                                        <div id="userList"></div>
+
+
+
 
                                     </div>
                                 </div>
@@ -187,7 +191,6 @@
                 <table class="table table-striped custom-table" id="myTable">
                     <thead>
                     <tr>
-                        <th>Select</th>
                         <th>Email</th>
                         <th>Username</th>
                         <th>Password</th>
@@ -229,7 +232,7 @@
                     },
                 },
                 columns: [
-                    {data: 'checkbox', name:'checkbox'},
+
                     {data: 'Email', name: 'Email'},
                     {data: 'Username', name: 'Username'},
                     {data: 'Password', name: 'Password'},
@@ -322,6 +325,40 @@
         @if (count($errors) > 0)
         $('#addService').modal('show');
         @endif
+    </script>
+
+
+    <script !src="">
+        $(document).ready(function(){
+            $('select[name="DepartmentId"]').on('change', function(){
+                var DepartmentId = $(this).val();
+
+                if(DepartmentId > 0){
+                    // console.log(DepartmentId);
+                    $.ajax({
+                        url: '{{url('/getusers').'/'}}'+ DepartmentId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            jQuery('#userList').empty();
+
+
+                            $('select[name="UserId"]').empty();
+                            $.each(data, function(key, value){
+                                $('#userList')
+                                    .append('<td><label>'+value+'</label><input type="checkbox" value="'+value+'" name="UserId" id="UserId"></td>');
+                            });
+
+
+                        }
+                    });
+
+                }
+            });
+
+
+        });
     </script>
 
 

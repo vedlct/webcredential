@@ -45,7 +45,7 @@ Route::post('/platform-update/{PlatformId}',   'PlatformController@update_platfo
 //------------------------Credential-------------
 
 Route::get('/credential', 'CredentialController@index')->name('credential');
-Route::get('/getUse/{UserId}','CredentialController@getUsers');
+Route::get('/getusers/{UserId}','CredentialController@getUsers');
 Route::post('/credential/insert', 'CredentialController@insert')->name('credential.insert');
 Route::post('/credentialShow', 'CredentialController@showcredential')->name('credential.show');
 Route::post('/credential-delete', 'CredentialController@deletecredential')->name('credential.delete');

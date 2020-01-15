@@ -28,7 +28,6 @@ class CredentialController extends Controller
     }
 
 
-
     public function insert(Request $r)
     {
 
@@ -50,6 +49,11 @@ class CredentialController extends Controller
 
     }
 
+    public function getusers($UserId)
+    {
+        $users = User::where('fkDepartmentId', $UserId)->pluck('name', 'UserId');
+        return json_encode($users);
+    }
 
     public function save(Request $r)
     {
@@ -101,16 +105,17 @@ class CredentialController extends Controller
     {
         $credentialinfo = Credential::select(DB::raw("(`platform`.`PlatformName`) as platformname"), 'Credentialid', 'fkPlatformid', 'credential.Email', 'credential.Username', 'credential.Password', 'credential.RecoveryPhone', 'credential.WhoElseHasAccess', 'credential.WebsiteUrl')
             ->leftjoin('platform', 'fkPlatformid', 'PlatformId')->get();
-        $datatables = DataTables::of($credentialinfo)
-            ->addColumn('checkbox', function () {
-                return '<input type="checkbox" name="sample" value="">';
 
-            });
-        return $datatables
-            ->rawColumns(['checkbox'])
-            ->make(true);
-
-
+        $datatables  = DataTables::of($credentialinfo);
+        return $datatables->make(true);
+//        $datatables = DataTables::of($credentialinfo)
+//            ->addColumn('checkbox', function () {
+//                return '<input type="checkbox" name="sample" value="">';
+//
+//            });
+//        return $datatables
+//            ->rawColumns(['checkbox'])
+//            ->make(true);
     }
 
 
