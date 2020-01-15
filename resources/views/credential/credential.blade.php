@@ -139,12 +139,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
 
-                                @foreach($users as $user)
-                                    <td><input name="UserId" type="checkbox" value="{{$user->UserId}}">{{$user->name}}
-                                    </td>
-                                    <br>
+{{--                                @foreach($users as $user)--}}
+{{--                                    <td><input name="UserId" type="checkbox" value="{{$user->UserId}}">{{$user->name}}--}}
+{{--                                    </td>--}}
+{{--                                    <br>--}}
 
-                                @endforeach
+{{--                                @endforeach--}}
+
+                                        <td><input type="checkbox" name="UserId" id="UserId"></td>
 
                                     </div>
                                 </div>
@@ -322,6 +324,36 @@
         @if (count($errors) > 0)
         $('#addService').modal('show');
         @endif
+    </script>
+
+
+    <script !src="">
+        $(document).ready(function(){
+            $('select[name="DepartmentId"]').on('change', function(){
+                var DepartmentId = $(this).val();
+
+                if(DepartmentId > 0){
+                    // console.log(DepartmentId);
+                    $.ajax({
+                        url: '{{url('/getusers').'/'}}'+ DepartmentId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+
+                            $('select[name="UserId"]').empty();
+                            $.each(data, function(key, value){
+                                $('select[name="UserId"]')
+                                    .append('<td value="' +key+'">' +value+ '</td>');
+                            });
+                        }
+                    });
+
+                }
+            });
+
+
+        });
     </script>
 
 
