@@ -347,7 +347,7 @@
                             $('select[name="UserId"]').empty();
                             $.each(data, function(key, value){
                                 $('#userList')
-                                    .append('<td><label>'+value+'</label><input type="checkbox" value="'+value+'" name="UserId" id="UserId"></td>');
+                                    .append('<td><label>'+value+'</label><input type="checkbox" value="'+key+'" name="UserId[]"></td>');
                             });
 
 

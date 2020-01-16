@@ -60,8 +60,6 @@ class CredentialController extends Controller
 
 
         $role = new Role();
-
-
         $role->fkCredentialid = $r->ccid;
         $role->fkUserId = $r->UserId;
         $role->save();
