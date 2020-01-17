@@ -52,6 +52,7 @@ class CredentialController extends Controller
     public function getusers($UserId)
     {
         $users = User::where('fkDepartmentId', $UserId)->pluck('name', 'UserId');
+
         return json_encode($users);
     }
 
@@ -59,10 +60,14 @@ class CredentialController extends Controller
     {
 
 
-        $role = new Role();
-        $role->fkCredentialid = $r->ccid;
-        $role->fkUserId = $r->UserId;
-        $role->save();
+        foreach($r->UserId as $UserId) {
+
+
+            $role = new Role();
+            $role->fkCredentialid = $r->ccid;
+            $role->fkUserId = $UserId;
+            $role->save();
+        }
 
 
         return back();
@@ -104,7 +109,7 @@ class CredentialController extends Controller
         $credentialinfo = Credential::select(DB::raw("(`platform`.`PlatformName`) as platformname"), 'Credentialid', 'fkPlatformid', 'credential.Email', 'credential.Username', 'credential.Password', 'credential.RecoveryPhone', 'credential.WhoElseHasAccess', 'credential.WebsiteUrl')
             ->leftjoin('platform', 'fkPlatformid', 'PlatformId')->get();
 
-        $datatables  = DataTables::of($credentialinfo);
+        $datatables = DataTables::of($credentialinfo);
         return $datatables->make(true);
 //        $datatables = DataTables::of($credentialinfo)
 //            ->addColumn('checkbox', function () {

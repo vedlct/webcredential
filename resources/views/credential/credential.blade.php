@@ -191,6 +191,7 @@
                 <table class="table table-striped custom-table" id="myTable">
                     <thead>
                     <tr>
+                        <th><input type="checkbox" id="select_all" name="select_invoice" /></th>
                         <th>Email</th>
                         <th>Username</th>
                         <th>Password</th>
@@ -221,6 +222,16 @@
         $(document).ready(function () {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             table = $('#myTable').DataTable({
+                columnDefs: [{
+                    orderable: true,
+                    className: 'select-checkbox',
+                    targets: 0
+                }],
+                select: {
+                    style:    'os',
+                    selector: 'td:first-child'
+                },
+                order: [[1,'asc']],
                 processing: true,
                 serverSide: true,
                 stateSave: true,
@@ -231,8 +242,10 @@
                         d._token = "{{csrf_token()}}";
                     },
                 },
-                columns: [
 
+
+                columns: [
+                    {data: 'Credentialid', name: 'Credentialid'},
                     {data: 'Email', name: 'Email'},
                     {data: 'Username', name: 'Username'},
                     {data: 'Password', name: 'Password'},
@@ -261,6 +274,7 @@
 
                     },
                 ],
+
             });
         });
 
@@ -353,6 +367,7 @@
 
                         }
                     });
+
 
                 }
             });
