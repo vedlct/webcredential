@@ -59,14 +59,16 @@ class CredentialController extends Controller
     public function save(Request $r)
     {
 
+        if (($r->UserId > 1) && ($r->ccid == 1)) {
 
-        foreach($r->UserId as $UserId) {
+            foreach ($r->UserId as $UserId) {
 
 
-            $role = new Role();
-            $role->fkCredentialid = $r->ccid;
-            $role->fkUserId = $UserId;
-            $role->save();
+                $role = new Role();
+                $role->fkCredentialid = $r->ccid;
+                $role->fkUserId = $UserId;
+                $role->save();
+            }
         }
 
 

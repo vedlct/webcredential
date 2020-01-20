@@ -112,6 +112,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <input type="hidden" id="ccid" name="ccid">
+                                <input type="hidden" id="ccidm" name="ccidm[]">
                                 <label>Department</label>
 
 
@@ -181,7 +182,10 @@
 
 
             <div class="table-responsive">
-                <form id="frm-example" action="" method="POST">
+                <p><b>Selected row data</b></p>
+            <pre id="view-rows"></pre>
+
+                <form id="frm-example" action="{{ route('role.save')}}" method="POST">
                     <table class="table table-striped custom-table" id="myTable">
                         <thead>
                         <tr>
@@ -204,8 +208,10 @@
                         </tbody>
                     </table>
 
-                    <p>
-                        <button type="button" id="roleButton" class="btn btn-primary" data-toggle="modal"  data-target="#roleModal" data-panel-id5="'data.Credentialid[]'" onclick="setmultiplerows(this)">Add Selected Credentials</button></p>
+                    <p><button type="button" class="btn btn-danger" id="roleButton" data-toggle="modal" data-target="#roleModal" data-panel-id5="'data.Credentialid'" onclick="setmultiplerows(this)">View Selected ID</button></p>
+
+{{--                    <p>--}}
+{{--                        <button type="button" id="roleButton" class="btn btn-primary" data-toggle="modal"  data-target="#roleModal" data-panel-id5="'data.Credentialid'" onclick="setmultiplerows(this)">Add Selected Credentials</button></p>--}}
 
                 </form>
             </div>
@@ -239,6 +245,8 @@
                     'style': 'multi'
                 },
                 'order': [[1, 'asc']],
+
+
                 processing: true,
                 serverSide: true,
                 stateSave: true,
@@ -310,7 +318,9 @@
 
         }
 
-        function setmultiplerows(){
+        function setmultiplerows(rowId){
+
+
 
             $('#frm-example').on('submit', function (e) {
                 var form = this;
@@ -319,9 +329,9 @@
 
                 // Iterate over all selected checkboxes
                 $.each(rows_selected, function (index, rowId) {
-                    // Create a hidden element
 
-                    $('#ccid').val(rowId);
+
+                    $('#ccidm').val($(rowId).data('panel-id5'));
                 });
             });
 
